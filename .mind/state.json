@@ -1,1 +1,1 @@
-{"contents":[{"text":"project_rest_api"}],"icon":" ","is_expanded":true,"children":[{"data":".mind\/data\/20221003131924-dependencies.md","is_expanded":false,"contents":[{"text":"dependencies"}]}],"uid":"20221003131853","type":1}
+{"children":[{"data":".mind\/data\/20221003131924-dependencies.md","contents":[{"text":"dependencies"}],"is_expanded":false},{"contents":[{"text":"auth-services"}],"data":".mind\/data\/20221004042338-user-functions.md","is_expanded":false}],"uid":"20221003131853","type":1,"icon":" ","contents":[{"text":"project_rest_api"}],"is_expanded":true}

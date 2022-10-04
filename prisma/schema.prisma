@@ -11,11 +11,10 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String
-  password  String // hashed pw
-  // timestamps
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement()) // unique id
+  email     String   @unique // unique email
+  name      String // user name
+  password  String // user hashed pw
+  createdAt DateTime @default(now()) // timestamp createdAt
+  updatedAt DateTime @updatedAt // timestamp updatedAt
 }
