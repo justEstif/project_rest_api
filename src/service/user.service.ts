@@ -4,17 +4,17 @@ import config from "config";
 import { CreateUserInput } from "../schema/user.schema";
 
 export const createUser = async ({ body }: CreateUserInput) => {
+  const prisma = new PrismaClient();
 
-  // create hash
+  // hash password
   const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
   const hash = bcrypt.hashSync(body.password, salt);
 
-  const prisma = new PrismaClient();
   const user = await prisma.user.create({
     data: {
       email: body.email,
       name: body.name,
-      password: hash // set pw to hash
+      password: hash.toString()
     },
   });
 
