@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement()) // unique id
+  id        String    @id @default(uuid()) // unique id
   email     String    @unique // unique email
   name      String // user name
   password  String // user hashed pw
@@ -21,11 +21,11 @@ model User {
 }
 
 model Session {
-  id     Int  @id @default(autoincrement()) // unique id
-  User   User @relation(fields: [userId], references: [id])
-  userId Int // userid
-  valid Boolean @default(true)
+  id        String   @id @default(uuid()) // unique id
+  user      User     @relation(fields: [userId], references: [id])
+  valid     Boolean  @default(true)
+  createdAt DateTime @default(now()) // timestamp createdAt
+  updatedAt DateTime @updatedAt // timestamp updatedAt
   userAgent String
-  createdAt DateTime  @default(now()) // timestamp createdAt
-  updatedAt DateTime  @updatedAt // timestamp updatedAt
+  userId    String
 }

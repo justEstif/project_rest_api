@@ -4,7 +4,7 @@ import { CreateUserInput } from "../schema/user.schema";
 import { createUser } from "../service/user.service";
 import log from "../utils/logger";
 
-const createUserHandler = async (
+export const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput["body"]>,
   res: Response
 ) => {
@@ -16,5 +16,3 @@ const createUserHandler = async (
     return res.status(409).send(error.message); // conflict
   }
 };
-
-export { createUserHandler };
