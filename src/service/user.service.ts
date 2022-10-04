@@ -5,6 +5,7 @@ import { CreateUserInput } from "../schema/user.schema";
 
 export const createUser = async ({ body }: CreateUserInput) => {
   const prisma = new PrismaClient();
+
   // middleware for hashing pw
   prisma.$use(async (params, next) => {
     if (params.model == "User" && params.action == "create") {
@@ -22,5 +23,6 @@ export const createUser = async ({ body }: CreateUserInput) => {
       password: body.password,
     },
   });
+
   return user;
 };
