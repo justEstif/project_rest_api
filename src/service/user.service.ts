@@ -34,7 +34,7 @@ export const validatePassword = async ({
     },
   });
 
-  // return false is no user or no match, else return user
+  // return false if no user or match, else return user without pw
   return !user
     ? false
     : !(await bcrypt.compare(password, user.password).catch((_) => false))
