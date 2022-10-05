@@ -26,3 +26,18 @@ export const findSessions = async (query: Partial<Session>) => {
   });
   return sessions;
 };
+export const updateSessions = async (
+  query: Partial<Session>,
+  update: Partial<Session>
+) => {
+  const updateSession = await prisma.session.updateMany({
+    where: {
+      ...(query && query),
+    },
+    data: {
+      ...(update && update),
+    },
+  });
+  return updateSession;
+};
+
