@@ -1,11 +1,12 @@
 import { RequestHandler } from "express";
-import _getKeyValue from "lodash/get";
+import { get } from "lodash";
 import { verifyJwt } from "../utils/jwt";
 
 const deserializeUser: RequestHandler = (req, res, next) => {
-  // NOTE check if we get the corrent access token
-  const accessToken = _getKeyValue(req.headers, "authorization", null);
-
+  const accessToken = get(req.headers, "authorization", null)?.replace(
+    /^Bearer\s/,
+    ""
+  );
   if (accessToken) {
     const { decoded } = verifyJwt(accessToken);
     if (decoded) {
