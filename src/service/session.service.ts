@@ -51,6 +51,8 @@ export const reIssueAccessToken = async ({
   refreshToken: string;
 }) => {
   const { decoded } = verifyJwt(refreshToken);
+
+  console.log(decoded); // TODO Remove this
   if (!decoded || !get(decoded, "session")) return false;
   const session = await prisma.session.findUnique({
     where: {

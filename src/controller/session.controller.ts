@@ -34,6 +34,9 @@ export const createUserSession: RequestHandler = async (req, res) => {
     { expiresIn: config.get<string>("refreshTokenTtl") } // options
   );
 
+  console.log(`accessToken: ${accessToken}`)
+  console.log(`refreshToken: ${refreshToken}`)
+
   // return access & refresh tokens
   return res.send({ accessToken, refreshToken });
 };
