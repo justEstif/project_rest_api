@@ -41,3 +41,28 @@ export const updateSessions = async (
   return updateSession;
 };
 
+export const reIssueAccessToken = async ({
+  refreshToken,
+}: {
+  refreshToken: string;
+}) => {
+  const { decoded } = verifyJwt(refreshToken);
+  if (!decoded || !get(decoded, "session")) return false;
+  const session = await prisma.session.findUnique({
+    where: {
+      id: get(decoded, "id"), // store the user id
+    },
+  });
+
+  if (!session || !session.valid) return false;
+
+  const user = await findUser({ id: session.userId });
+  if (!user) return false;
+
+  const accessToken = signJwt(
+    { ...user, session: session.id },
+    { expiresIn: config.get<string>("accessTokenTtl") }
+  );
+
+  return accessToken;
+};
