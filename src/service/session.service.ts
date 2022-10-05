@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../utils/prisma";
 
 // TODO better types
 export const createSession = async ({
@@ -8,7 +8,6 @@ export const createSession = async ({
   userAgent: string;
   userId: string;
 }) => {
-  const prisma = new PrismaClient();
 
   const session = await prisma.session.create({
     data: {
