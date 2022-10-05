@@ -1,9 +1,10 @@
 import config from "config";
 import { Response, Request } from "express";
 import { CreateSessionType } from "../schema/session.schema";
-import { createSession } from "../service/session.service";
+import { createSession, findSessions } from "../service/session.service";
 import { validatePassword } from "../service/user.service";
 import { signJwt } from "../utils/jwt";
+import { User } from "@prisma/client";
 
 export const createUserSession = async (
   req: Request<{}, {}, CreateSessionType["body"]>,
@@ -37,4 +38,10 @@ export const createUserSession = async (
 
   // return access & refresh tokens
   return res.send({ accessToken, refreshToken });
+};
+
+export const getUserSessionsHandler = async (req: Request, res: Response) => {
+  const { id }: User = res.locals.user;
+  const sessions = await findSessions({ userId: id, valid: true });
+  return res.status(200).send(sessions);
 };
