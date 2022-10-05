@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import config from "config";
 import { omit } from "lodash";
 import { CreateUserInput } from "../schema/user.schema";
+import { Session } from "@prisma/client";
 
 export const createUser = async ({ body }: CreateUserInput) => {
   // hash password

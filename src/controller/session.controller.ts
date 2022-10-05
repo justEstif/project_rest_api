@@ -1,15 +1,15 @@
 import config from "config";
-import { Response, Request } from "express";
-import { CreateSessionType } from "../schema/session.schema";
-import { createSession, findSessions } from "../service/session.service";
+import { User } from "@prisma/client";
+import { RequestHandler } from "express";
+import {
+  createSession,
+  findSessions,
+  updateSessions,
+} from "../service/session.service";
 import { validatePassword } from "../service/user.service";
 import { signJwt } from "../utils/jwt";
-import { User } from "@prisma/client";
 
-export const createUserSession = async (
-  req: Request<{}, {}, CreateSessionType["body"]>,
-  res: Response
-) => {
+export const createUserSession: RequestHandler = async (req, res) => {
   // validate the user's password
   const user = await validatePassword(req.body);
   if (!user) {
@@ -23,22 +23,12 @@ export const createUserSession = async (
   });
 
   // create an access token
-  const accessToken = signJwt({
-    ...user,
-    session: session.id,
-    options: { expiresIn: config.get<string>("accessTokenTtl") },
-  });
   const accessToken = signJwt(
     { ...user, session: session.id },
     { expiresIn: config.get<string>("accessTokenTtl") }
   );
 
   // create a refresh token
-  const refreshToken = signJwt({
-    ...user,
-    session: session.id,
-    options: { expiresIn: config.get<string>("refreshTokenTtl") },
-  });
   const refreshToken = signJwt(
     { ...user, session: session.id },
     { expiresIn: config.get<string>("refreshTokenTtl") } // options
