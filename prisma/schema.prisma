@@ -17,15 +17,15 @@ model User {
   password  String // user hashed pw
   createdAt DateTime  @default(now()) // timestamp createdAt
   updatedAt DateTime  @updatedAt // timestamp updatedAt
-  Session   Session[]
+  sessions  Session[]
 }
 
 model Session {
   id        String   @id @default(uuid()) // unique id
-  user      User     @relation(fields: [userId], references: [id])
   valid     Boolean  @default(true)
   createdAt DateTime @default(now()) // timestamp createdAt
   updatedAt DateTime @updatedAt // timestamp updatedAt
   userAgent String
   userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }

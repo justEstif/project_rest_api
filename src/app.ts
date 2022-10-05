@@ -6,10 +6,11 @@ import deserializeUser from "./middleware/deserializeUser";
 
 const app = express();
 const port = config.get<number>("port");
-app.use(json()); // body parser
-app.use(urlencoded({ extended: false }));
 
-app.use(deserializeUser);
+// middlewares
+app.use(json()); // body parser
+app.use(urlencoded({ extended: false }));// body parser
+app.use(deserializeUser); // get user from jwt
 
 app.listen(port, async () => {
   log.info(`App is running at http://localhost:${port}`);

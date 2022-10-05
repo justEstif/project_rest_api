@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+
 const requireUser: RequestHandler = (_, res, next) => {
   if (res.locals.user) {
     next();
