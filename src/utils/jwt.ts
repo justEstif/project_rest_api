@@ -1,22 +1,20 @@
 import jwt from "jsonwebtoken";
 import config from "config";
 
-const privateKey = config.get<string>("privateKey");
-const publicKey = config.get<string>("publicKey");
+const jwtSecret = config.get<string>("jwtSecret");
 
 export const signJwt = (
   object: Object,
   options?: jwt.SignOptions | undefined
 ) => {
-  return jwt.sign(object, privateKey, {
+  return jwt.sign(object, jwtSecret, {
     ...(options && options),
-    algorithm: "RS256",
   });
 };
 
 export const verifyJwt = (token: string) => {
   try {
-    const decoded = jwt.verify(token, publicKey);
+    const decoded = jwt.verify(token, jwtSecret);
     return {
       valid: true,
       expired: false,
