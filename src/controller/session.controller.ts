@@ -28,6 +28,10 @@ export const createUserSession = async (
     session: session.id,
     options: { expiresIn: config.get<string>("accessTokenTtl") },
   });
+  const accessToken = signJwt(
+    { ...user, session: session.id },
+    { expiresIn: config.get<string>("accessTokenTtl") }
+  );
 
   // create a refresh token
   const refreshToken = signJwt({
@@ -35,13 +39,26 @@ export const createUserSession = async (
     session: session.id,
     options: { expiresIn: config.get<string>("refreshTokenTtl") },
   });
+  const refreshToken = signJwt(
+    { ...user, session: session.id },
+    { expiresIn: config.get<string>("refreshTokenTtl") } // options
+  );
 
   // return access & refresh tokens
   return res.send({ accessToken, refreshToken });
 };
 
-export const getUserSessionsHandler = async (req: Request, res: Response) => {
-  const { id }: User = res.locals.user;
-  const sessions = await findSessions({ userId: id, valid: true });
+export const getUserSessionsHandler: RequestHandler = async (_, res) => {
+  const user: User = res.locals.user;
+  const sessions = await findSessions({ userId: user.id, valid: true });
   return res.status(200).send(sessions);
+};
+
+export const deleteSessionHandler: RequestHandler = async (_, res) => {
+  const user: User = res.locals.user;
+  await updateSessions({ userId: user.id, valid: true }, { valid: false });
+  return res.status(200).send({
+    accessToken: null,
+    refreshToken: null,
+  });
 };
