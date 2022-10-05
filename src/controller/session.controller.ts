@@ -1,12 +1,15 @@
 import config from "config";
-import { RequestHandler } from "express";
+import { Response, Request } from "express";
+import { CreateSessionType } from "../schema/session.schema";
 import { createSession } from "../service/session.service";
 import { validatePassword } from "../service/user.service";
 import { signJwt } from "../utils/jwt";
 
-export const createUserSession: RequestHandler = async (req, res) => {
+export const createUserSession = async (
+  req: Request<{}, {}, CreateSessionType["body"]>,
+  res: Response
+) => {
   // validate the user's password
-  // TODO add some types to the passed request
   const user = await validatePassword(req.body);
   if (!user) {
     return res.status(401).send("Invalid email or password");
