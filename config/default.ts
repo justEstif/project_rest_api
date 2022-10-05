@@ -1,27 +1,7 @@
 export default {
   port: 1337,
   saltWorkFactor: 10,
-  accessTokenTtl: '15m',
-  refreshTokenTtl: '1y',
-  privateKey: `-----BEGIN RSA PRIVATE KEY-----
-MIICWwIBAAKBgH4xbIcJDcVI1qALdVa0/U11hC+m96hfR+abt3/ZkV1R+L9woGrv
-eCUhn40YCJGgK14Pm2g+kqcsrZvq4wqMmFiDFPSH7pYWePOM+04hDDgNDSyOULiX
-5uEY+7R3Q9pH07+pYjBt5K/IPtq+iIPBoqCfU3V3oEnr8tCHnnwrGDWBAgMBAAEC
-gYBbumVfCs+9tiJ8l5elfU4ave9mDAI9m3TSRiJuhqHJqcocriuNT6CPrQ8jKnMg
-F8MuTj3y2nkTl8Bic6yxgF1D+UcRB5cUQ1tiTEhRcbOi3YuJUV+wWJdMvJ3TBNnQ
-aHtl694mF3hpO6fuwIEjeTlnszOAmC8LBJ4TtLAKPaBQWQJBAPABu/UB8qJbfOaa
-UjsBXWMuK4cYmrKtxs8O2AzWyY2ZXbxK42kFrfeWnorB3mpkydjKNt7ph5lDYX4h
-4ejfzs8CQQCGmiVwf7NLGoq9PGZzkAawzR17uBdm+3JVpeKPTshBBCs5Y4NfT30t
-VBmMm0Hmogj20bTuPwii7AGUATa3DkqvAkEAjLb3lDaII1iwaiOggqfSMQwoyRRL
-3uaz4UI6uYxUr4hzxKnDmxeRX9AXNBNma8qb7VbhxN/2eI1g46rJ4NcXUQJANfAT
-TK9/k3sBWa+YhnqSk8q+I9OzXQsp1/Rvg2nYiWU4RPkBrfHWgZGP425bzCXmXbHP
-RSFxPohAYaTS3iwV9QJAGSGIkGCu+6ylL0IxsyQH8HVztiWpFTpcfc11+E6rgIYJ
-b1eDJNrlxgP//tHHv8ScpHjW4Xf5DleRB32lzTWYzg==
------END RSA PRIVATE KEY-----`,
-  publicKey: `-----BEGIN PUBLIC KEY-----
-MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgH4xbIcJDcVI1qALdVa0/U11hC+m
-96hfR+abt3/ZkV1R+L9woGrveCUhn40YCJGgK14Pm2g+kqcsrZvq4wqMmFiDFPSH
-7pYWePOM+04hDDgNDSyOULiX5uEY+7R3Q9pH07+pYjBt5K/IPtq+iIPBoqCfU3V3
-oEnr8tCHnnwrGDWBAgMBAAE=
------END PUBLIC KEY-----`,
+  accessTokenTtl: "15m",
+  refreshTokenTtl: "1y",
+  jwtSecret: "LdYfN40ZaYDefi26",
 };
