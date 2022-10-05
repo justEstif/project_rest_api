@@ -1,5 +1,9 @@
 import prisma from "../utils/prisma";
 import { Session } from "@prisma/client";
+import { signJwt, verifyJwt } from "../utils/jwt";
+import { get } from "lodash";
+import { findUser } from "./user.service";
+import config from "config";
 
 export const createSession = async ({
   userId,
@@ -20,12 +24,12 @@ export const createSession = async ({
 export const findSessions = async (query: Partial<Session>) => {
   const sessions = await prisma.session.findMany({
     where: {
-      ...(query.valid && { valid: query.valid }),
-      ...(query.userId && { userId: query.userId }),
+      ...(query && query),
     },
   });
   return sessions;
 };
+
 export const updateSessions = async (
   query: Partial<Session>,
   update: Partial<Session>
