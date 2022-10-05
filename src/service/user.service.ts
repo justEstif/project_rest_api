@@ -41,3 +41,12 @@ export const validatePassword = async ({
     ? false
     : omit(user, ["password"]);
 };
+
+export const findUser = async ({ userId }: Partial<Session>) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  return user;
+};
